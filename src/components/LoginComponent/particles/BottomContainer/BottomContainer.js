@@ -77,10 +77,10 @@ const BottomContainer = props => {
           {type === "login" && "Sign Up!"}
           {type === "register" && "Login me In!"}
         </Text>
-        {!disableSwitch && (
+        {type === "register" && (
           <View style={styles.rememberMeContainer}>
-            <Text style={switchTextStyle || styles.switchTextStyle}>
-              {switchText}
+            <Text style={styles.switchTextStyle}>
+              I'm a Recruiter
             </Text>
             <Switch
               value={switchValue}
