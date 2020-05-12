@@ -12,6 +12,23 @@ const LoginScreen = ({navigation}) => {
   const [isLoading, setLoading] = useState(false);
   const [isLogging, setLogging] = useState(true);
 
+
+  const submitLogin = () => {
+    setLoading(true)
+    alert("Login Button is pressed")
+    setTimeout( () => {
+      setLoading(false)
+    }, 2000)
+  }
+
+  const submitRegister = () => {
+    setLoading(true)
+    alert("Register Button is pressed")
+    setTimeout( () => {
+      setLoading(false)
+    }, 2000)
+  }
+
   return <>
     <StatusBar hidden />
       <SafeAreaView>
@@ -33,8 +50,8 @@ const LoginScreen = ({navigation}) => {
           repeatPasswordPlaceholder="Password"
           repeatPasswordIconComponent={repeatPasswordIcon}
 
-          onPressLogin={() => submitLogin}
-          onPressRegister={() => submitRegister}
+          onPressLogin={() => submitLogin()}
+          onPressRegister={() => submitRegister()}
 
           onSignupClick={() => setLogging(!isLogging)}
           switchValue={isCheckedSwitch}
@@ -42,14 +59,6 @@ const LoginScreen = ({navigation}) => {
         />
       </SafeAreaView>
   </>
-}
-
-const submitLogin = () => {
-  alert("Login Button is pressed")
-}
-
-const submitRegister = () => {
-  alert("Register Button is pressed")
 }
 
 const userIcon = <Icon
