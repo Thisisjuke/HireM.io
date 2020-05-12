@@ -12,16 +12,20 @@ import { UserContext } from "../contexts/UserContext";
 const LoginScreen = ({navigation}) => {
   const [authenticated, setAuthenticated] = useContext(UserContext);
 
-  const [isCheckedSwitch, setCheckedSwitch] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [isLogging, setLogging] = useState(true);
 
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [repeatPassword, setRepeatPassword] = useState(null);
+  const [isCheckedSwitch, setCheckedSwitch] = useState(false);
+
   const submitLogin = () => {
     setLoading(true)
-    alert("Login Button is pressed")
+    alert(`${email}, ${password}, ${repeatPassword}`)
     setTimeout( () => {
-      onSignIn({jwt:"yoyo"})
-      setAuthenticated({jwt:"yoyo"})
+      //onSignIn({jwt:"yoyo"})
+      //setAuthenticated({jwt:"yoyo"})
       setLoading(false)
     }, 2000)
   }
@@ -48,12 +52,15 @@ const LoginScreen = ({navigation}) => {
           usernameIconComponent={userIcon}
           usernameTitle="Your E-mail"
           usernamePlaceholder="E-mail"
+          usernameUpdateInput={val => setEmail(val)}
           passwordIconComponent={passwordIcon}
           passwordTitle="Your Password"
           passwordPlaceholder="Password"
+          passwordUpdateInput={val => setPassword(val)}
           repeatPasswordTitle="Repeat your Password"
           repeatPasswordPlaceholder="Password"
           repeatPasswordIconComponent={repeatPasswordIcon}
+          repeatPasswordUpdateInput={val => setRepeatPassword(val)}
 
           onPressLogin={() => submitLogin()}
           onPressRegister={() => submitRegister()}

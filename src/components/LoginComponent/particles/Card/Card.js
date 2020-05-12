@@ -38,7 +38,7 @@ const Card = props => {
             placeholder={placeholder}
             placeholderTextColor="#ccc"
             selectionColor={selectionColor}
-            onChangeText={onChangeText}
+            onChangeText={v => onChangeText(v)}
             style={textStyle || _textInputStyle(textColor)}
             {...props}
           />

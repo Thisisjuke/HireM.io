@@ -31,6 +31,9 @@ const BottomContainer = props => {
     repeatPasswordTextInputValue,
     repeatPasswordPlaceholder,
     repeatPasswordIconComponent,
+    usernameUpdateInput,
+    passwordUpdateInput,
+    repeatPasswordUpdateInput,
     onSignupClick,
     type
   } = props;
@@ -42,8 +45,8 @@ const BottomContainer = props => {
           title={usernameTitle}
           value={usernameTextInputValue}
           placeholder={usernamePlaceholder}
-          onChangeText={usernameOnChangeText}
           iconComponent={usernameIconComponent}
+          onChangeText={usernameUpdateInput}
           {...props}
         />
         <Card
@@ -53,8 +56,8 @@ const BottomContainer = props => {
           title={passwordTitle}
           value={passwordTextInputValue}
           placeholder={passwordPlaceholder}
-          onChangeText={text => passwordOnChangeText(text)}
           iconComponent={passwordIconComponent}
+          onChangeText={passwordUpdateInput}
           {...props}
         />
         { type === "register" &&
@@ -66,6 +69,7 @@ const BottomContainer = props => {
           value={repeatPasswordTextInputValue}
           placeholder={repeatPasswordPlaceholder}
           iconComponent={repeatPasswordIconComponent}
+          onChangeText={repeatPasswordUpdateInput}
           {...props}
         />
         }
