@@ -12,7 +12,6 @@ const LoginScreen = ({navigation}) => {
   const [isLoading, setLoading] = useState(false);
   const [isLogging, setLogging] = useState(true);
 
-
   const submitLogin = () => {
     setLoading(true)
     alert("Login Button is pressed")
