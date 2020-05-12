@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginScreen from "../screens/LoginScreen";
@@ -6,13 +6,14 @@ import HomeScreen from "../screens/HomeScreen";
 import IdleScreen from "../screens/IdleScreen";
 
 import { isSignedIn } from "../services/Auth"
+import { UserContext } from "../contexts/UserContext";
 
 const Stack = createStackNavigator();
 
 const navigation = () => {
-  const [isLogged, setLogged] = useState(null);
+  const [authenticated, setAuthenticated] = useContext(UserContext);
 
-  isSignedIn().then(res => setLogged(!!res))
+  isSignedIn().then(res => setAuthenticated(!!res))
 
   return(
       <Stack.Navigator
@@ -21,18 +22,18 @@ const navigation = () => {
         }}
       >
         {
-          isLogged === null ? (
+          authenticated === null ? (
             <>
               <Stack.Screen name="Idle" component={IdleScreen} />
             </>
           ) : (
-            isLogged ? (
+            authenticated ? (
                 <>
                   <Stack.Screen name="Home" component={HomeScreen} />
                 </>
               ) : (
                 <>
-                  <Stack.Screen name="Login" component={LoginScreen} />
+                  <Stack.Screen name="Login" component={LoginScreen}/>
                 </>
             )
           )

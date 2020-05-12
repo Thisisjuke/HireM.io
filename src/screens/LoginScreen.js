@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -6,8 +6,12 @@ import {
 import Icon from "react-native-dynamic-vector-icons";
 
 import LoginForm from "../components/LoginComponent/LoginForm";
+import { onSignIn, onSignOut } from '../services/Auth'
+import { UserContext } from "../contexts/UserContext";
 
 const LoginScreen = ({navigation}) => {
+  const [authenticated, setAuthenticated] = useContext(UserContext);
+
   const [isCheckedSwitch, setCheckedSwitch] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [isLogging, setLogging] = useState(true);
@@ -16,6 +20,8 @@ const LoginScreen = ({navigation}) => {
     setLoading(true)
     alert("Login Button is pressed")
     setTimeout( () => {
+      onSignIn({jwt:"yoyo"})
+      setAuthenticated({jwt:"yoyo"})
       setLoading(false)
     }, 2000)
   }
