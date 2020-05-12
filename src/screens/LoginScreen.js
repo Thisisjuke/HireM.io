@@ -1,34 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
+import Icon from "react-native-dynamic-vector-icons";
 
-import LoginComponent from "react-native-login-screen";
-import LogoComponent from "../components/Logo";
+import LoginForm from "../components/LoginComponent/LoginForm";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [isCheckedSwitch, setCheckedSwitch] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [isLogging, setLogging] = useState(true);
 
   return <>
     <StatusBar hidden />
       <SafeAreaView>
-        <LoginComponent
+        <LoginForm
+          type={isLogging ? "login" : "register"}
+
           spinnerEnable
           spinnerVisibility={isLoading}
           source={{ uri: "https://images.pexels.com/photos/2113554/pexels-photo-2113554.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" }}
-          switchValue={isCheckedSwitch}
-          onPressLogin={() => alert("Login Button is pressed")}
-          onPressSettings={() => alert("Settings Button is pressed")}
-          onSwitchValueChange={switchValue => setCheckedSwitch(switchValue)}
-          usernameOnChangeText={username => alert("Username: ", username)}
-          passwordOnChangeText={password => alert("Password: ", password)}
           loginButtonBackgroundColor="#003348"
-          logoComponent={LogoComponent()}
+
+          usernameIconComponent={userIcon}
+          usernameTitle="Your E-mail"
+          usernamePlaceholder="E-mail"
+          passwordIconComponent={passwordIcon}
+          passwordTitle="Your Password"
+          passwordPlaceholder="Password"
+          repeatPasswordTitle="Repeat your Password"
+          repeatPasswordPlaceholder="Password"
+          repeatPasswordIconComponent={repeatPasswordIcon}
+
+          onPressLogin={() => submitLogin}
+          onPressRegister={() => submitRegister}
+
+          onSignupClick={() => setLogging(!isLogging)}
+          switchValue={isCheckedSwitch}
+          onSwitchValueChange={switchValue => setCheckedSwitch(switchValue)}
         />
       </SafeAreaView>
   </>
 }
+
+const submitLogin = () => {
+  alert("Login Button is pressed")
+}
+
+const submitRegister = () => {
+  alert("Register Button is pressed")
+}
+
+const userIcon = <Icon
+  size={30}
+  name="user"
+  color="black"
+  type="AntDesign"
+/>
+
+const passwordIcon = <Icon
+  size={30}
+  name="lock"
+  color="black"
+  type="AntDesign"
+/>
+
+const repeatPasswordIcon = <Icon
+  size={30}
+  name="lock"
+  color="black"
+  type="AntDesign"
+/>
+
 
 export default LoginScreen
