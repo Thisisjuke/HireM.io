@@ -5,13 +5,16 @@
 
 import 'react-native-gesture-handler';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+
 import {
   configureFonts,
   DefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
+
+import RNBootSplash from 'react-native-bootsplash';
 import {exact} from 'prop-types';
 
 const fontConfig = {
@@ -57,6 +60,9 @@ import {UserProvider} from './src/contexts/UserContext';
 import FlashMessage from 'react-native-flash-message';
 
 const App: () => React$Node = () => {
+  useEffect(() => {
+    RNBootSplash.hide({duration: 250});
+  }, []);
   return (
     <PaperProvider theme={theme}>
       <AuthProvider>

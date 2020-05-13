@@ -1,5 +1,7 @@
 package com.recruitproject;
 
+import android.os.Bundle;
+import com.zoontek.rnbootsplash.RNBootSplash;
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
@@ -10,6 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
+    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this);
     return "RecruitProject";
   }
 }
