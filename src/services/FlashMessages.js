@@ -36,3 +36,8 @@ export const FmErrorWhileFetch = () => showMessage({
   type: "danger",
 });
 
+export const FmLoginSessionExpired = () => showMessage({
+  message: "Your session has expired.",
+  description: "Please log you again.",
+  type: "danger",
+});

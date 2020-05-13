@@ -6,7 +6,7 @@ import {
 import Icon from "react-native-dynamic-vector-icons";
 
 import LoginForm from "../components/LoginComponent/LoginForm";
-import { onSignIn, onSignOut } from '../services/Auth'
+import { onSignIn, signOut } from '../services/Auth'
 import { UserContext } from "../contexts/UserContext";
 import {FmCreatedAccount, FmMissingField, FmNotMatchingPass, FmNotStrongEnoughPass, FmInvalidEmail, FmErrorWhileFetch } from "../services/FlashMessages";
 import { checkPassword, checkEmail } from "../services/RegexChecker";
