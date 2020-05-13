@@ -3,7 +3,7 @@ import {wrappedFetch} from "../services/FetchWrapper";
 export const createUser = (data, callback, onError = () => {}) => {
   const f = { method: "POST", body: data }
 
-  return wrappedFetch(`/users`, f, callback, onError)
+  return wrappedFetch(`https://5ebbff84f2cfeb001697d4e3.mockapi.io/user-register`, f, callback, onError)
 }
 
 export const logUser = (data, callback, onError = () => {}) => {

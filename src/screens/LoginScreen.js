@@ -7,7 +7,7 @@ import Icon from "react-native-dynamic-vector-icons";
 
 import LoginForm from "../components/LoginComponent/LoginForm";
 import { setUserToken } from '../services/Auth'
-import { UserContext } from "../contexts/UserContext";
+import { AuthContext } from "../contexts/AuthContext";
 import {
   FmCreatedAccount,
   FmMissingField,
@@ -21,7 +21,7 @@ import { checkPassword, checkEmail } from "../services/RegexChecker";
 import { createUser, logUser } from "../api/User";
 
 const LoginScreen = () => {
-  const [authenticated, setAuthenticated] = useContext(UserContext);
+  const [authenticated, setAuthenticated] = useContext(AuthContext);
 
   const [isLoading, setLoading] = useState(false);
   const [isLogging, setLogging] = useState(true);
