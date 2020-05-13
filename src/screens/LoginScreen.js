@@ -8,8 +8,9 @@ import Icon from "react-native-dynamic-vector-icons";
 import LoginForm from "../components/LoginComponent/LoginForm";
 import { onSignIn, onSignOut } from '../services/Auth'
 import { UserContext } from "../contexts/UserContext";
-import {FmCreatedAccount, FmMissingField, FmNotMatchingPass, FmNotStrongEnoughPass, FmInvalidEmail } from "../services/FlashMessages";
+import {FmCreatedAccount, FmMissingField, FmNotMatchingPass, FmNotStrongEnoughPass, FmInvalidEmail, FmErrorWhileFetch } from "../services/FlashMessages";
 import { checkPassword, checkEmail } from "../services/RegexChecker";
+import {postUser} from "../api/User";
 
 const LoginScreen = ({navigation}) => {
   const [authenticated, setAuthenticated] = useContext(UserContext);
@@ -54,27 +55,23 @@ const LoginScreen = ({navigation}) => {
       setLoading(false)
       return
     }
-    const fetchData = {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-        recruiter: isCheckedSwitch
-      }),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }
-    fetch('http://localhost:3000/users', fetchData)
-      .then(response => response.json())
-      .then(json => {
-        console.log(json)
+    const fetchData = { email, password, recruiter: isCheckedSwitch }
+    postUser(
+      fetchData,
+      () => {
         FmCreatedAccount()
+        setPassword(null)
+        setEmail(null)
+        setRepeatPassword(null)
         setLogging(true)
         setLoading(false)
         setPassword(null)
-      })
+      },
+      () => {
+        FmErrorWhileFetch()
+        setLoading(false)
+      }
+    )
   }
 
   return <>

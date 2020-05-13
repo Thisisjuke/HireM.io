@@ -40,6 +40,7 @@ const BottomContainer = props => {
     onSignupClick,
     type
   } = props;
+
   return (
     <View style={container(backgroundColor)}>
       <Text style={styles.title}>{type === "register" ? "Register" : "Login"}</Text>

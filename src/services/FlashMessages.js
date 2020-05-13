@@ -30,3 +30,9 @@ export const FmInvalidEmail = () => showMessage({
   type: "danger",
 });
 
+export const FmErrorWhileFetch = () => showMessage({
+  message: "Oops... Something wrong happened.",
+  description: "Please retry or verify that your phone is connected to internet.",
+  type: "danger",
+});
+
