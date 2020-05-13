@@ -41,3 +41,9 @@ export const FmLoginSessionExpired = () => showMessage({
   description: "Please log you again.",
   type: "danger",
 });
+
+export const FmInvalidUserCredential = () => showMessage({
+  message: "Wrong email and password combination.",
+  description: "Please verify your email and password.",
+  type: "warning",
+});

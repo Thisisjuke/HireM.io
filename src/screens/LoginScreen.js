@@ -6,13 +6,21 @@ import {
 import Icon from "react-native-dynamic-vector-icons";
 
 import LoginForm from "../components/LoginComponent/LoginForm";
-import { onSignIn, signOut } from '../services/Auth'
+import { setUserToken } from '../services/Auth'
 import { UserContext } from "../contexts/UserContext";
-import {FmCreatedAccount, FmMissingField, FmNotMatchingPass, FmNotStrongEnoughPass, FmInvalidEmail, FmErrorWhileFetch } from "../services/FlashMessages";
+import {
+  FmCreatedAccount,
+  FmMissingField,
+  FmNotMatchingPass,
+  FmNotStrongEnoughPass,
+  FmInvalidEmail,
+  FmErrorWhileFetch,
+  FmInvalidUserCredential
+} from "../services/FlashMessages";
 import { checkPassword, checkEmail } from "../services/RegexChecker";
-import {postUser} from "../api/User";
+import { createUser, logUser } from "../api/User";
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = () => {
   const [authenticated, setAuthenticated] = useContext(UserContext);
 
   const [isLoading, setLoading] = useState(false);
@@ -25,12 +33,29 @@ const LoginScreen = ({navigation}) => {
 
   const submitLogin = () => {
     setLoading(true)
-    alert(`${email}, ${password}, ${repeatPassword}`)
-    setTimeout( () => {
-      //onSignIn({jwt:"yoyo"})
-      //setAuthenticated({jwt:"yoyo"})
+    if(email === null || password === null){
+      FmMissingField()
       setLoading(false)
-    }, 2000)
+      return
+    }
+    if(!checkEmail(email)){
+      FmInvalidEmail()
+      setLoading(false)
+      return
+    }
+    logUser(
+      { email, password },
+      res => {
+        setLoading(false)
+        setUserToken(res.token)
+        setAuthenticated(res)
+      },
+      () => {
+        FmInvalidUserCredential()
+        setPassword(null)
+        setLoading(false)
+      }
+    )
   }
 
   const submitRegister = () => {
@@ -55,9 +80,8 @@ const LoginScreen = ({navigation}) => {
       setLoading(false)
       return
     }
-    const fetchData = { email, password, recruiter: isCheckedSwitch }
-    postUser(
-      fetchData,
+    createUser(
+      { email, password, recruiter: isCheckedSwitch },
       () => {
         FmCreatedAccount()
         setPassword(null)

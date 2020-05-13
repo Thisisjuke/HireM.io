@@ -4,7 +4,6 @@ import { Switch, Text, View } from "react-native";
 import Card from "../Card/Card";
 import Icon from "react-native-dynamic-vector-icons";
 import styles, { container } from "./BottomContainer.style";
-import LoginForm from "../../LoginForm";
 
 const BottomContainer = props => {
   const {

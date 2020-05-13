@@ -1,16 +1,17 @@
-import {signOut} from "./Auth";
+import {getUserToken, signOut} from "./Auth";
 import { FmLoginSessionExpired } from "./FlashMessages";
 
 const HEADERS_DEFAULT = {
   'Accept': 'application/json',
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
 }
 
 const BACKEND_URL = "http://localhost:3000"
 
-export const wrappedFetch = (url, f, c = () => {}, e = () => {}) => {
-  f.headers = HEADERS_DEFAULT
+export const wrappedFetch = async (url, f, c = () => {}, e = () => {}) => {
   f.body = JSON.stringify(f.body)
+  f.headers = HEADERS_DEFAULT
+  f.headers['Authorization'] = await getUserToken()
 
   request(url, f)
     .then(res => c(res))
@@ -31,7 +32,7 @@ function parseJSON(response) {
 
 function request(url, options) {
   return new Promise((resolve, reject) => {
-    fetch(`${BACKEND_URL}${url}`, options)
+    fetch(`${url}`, options)
       .then(parseJSON)
       .then((response) => {
         if (response.ok) {
