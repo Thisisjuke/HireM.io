@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -6,27 +6,75 @@ import {
 import Icon from "react-native-dynamic-vector-icons";
 
 import LoginForm from "../components/LoginComponent/LoginForm";
+import { onSignIn, onSignOut } from '../services/Auth'
+import { UserContext } from "../contexts/UserContext";
+import {FmCreatedAccount, FmMissingField, FmNotMatchingPass, FmNotStrongEnoughPass, FmInvalidEmail } from "../services/FlashMessages";
+import { checkPassword, checkEmail } from "../services/RegexChecker";
 
 const LoginScreen = ({navigation}) => {
-  const [isCheckedSwitch, setCheckedSwitch] = useState(false);
+  const [authenticated, setAuthenticated] = useContext(UserContext);
+
   const [isLoading, setLoading] = useState(false);
   const [isLogging, setLogging] = useState(true);
 
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [repeatPassword, setRepeatPassword] = useState(null);
+  const [isCheckedSwitch, setCheckedSwitch] = useState(false);
 
   const submitLogin = () => {
     setLoading(true)
-    alert("Login Button is pressed")
+    alert(`${email}, ${password}, ${repeatPassword}`)
     setTimeout( () => {
+      //onSignIn({jwt:"yoyo"})
+      //setAuthenticated({jwt:"yoyo"})
       setLoading(false)
     }, 2000)
   }
 
   const submitRegister = () => {
     setLoading(true)
-    alert("Register Button is pressed")
-    setTimeout( () => {
+    if(email === null || password === null || repeatPassword === null){
+      FmMissingField()
       setLoading(false)
-    }, 2000)
+      return
+    }
+    if(!checkEmail(email)){
+      FmInvalidEmail()
+      setLoading(false)
+      return
+    }
+    if (!checkPassword(password)) {
+      FmNotStrongEnoughPass()
+      setLoading(false)
+      return
+    }
+    if(password !== repeatPassword) {
+      FmNotMatchingPass()
+      setLoading(false)
+      return
+    }
+    const fetchData = {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+        recruiter: isCheckedSwitch
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+    fetch('http://localhost:3000/users', fetchData)
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        FmCreatedAccount()
+        setLogging(true)
+        setLoading(false)
+        setPassword(null)
+      })
   }
 
   return <>
@@ -43,12 +91,20 @@ const LoginScreen = ({navigation}) => {
           usernameIconComponent={userIcon}
           usernameTitle="Your E-mail"
           usernamePlaceholder="E-mail"
+          usernameUpdateInput={val => setEmail(val)}
+          usernameInputValue={email}
+
           passwordIconComponent={passwordIcon}
           passwordTitle="Your Password"
           passwordPlaceholder="Password"
+          passwordUpdateInput={val => setPassword(val)}
+          passwordInputValue={password}
+
           repeatPasswordTitle="Repeat your Password"
           repeatPasswordPlaceholder="Password"
           repeatPasswordIconComponent={repeatPasswordIcon}
+          repeatPasswordUpdateInput={val => setRepeatPassword(val)}
+          repeatPasswordInputValue={repeatPassword}
 
           onPressLogin={() => submitLogin()}
           onPressRegister={() => submitRegister()}
