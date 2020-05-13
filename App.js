@@ -5,7 +5,7 @@
 
 import 'react-native-gesture-handler';
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import {exact} from 'prop-types';
 
 import {
@@ -13,7 +13,6 @@ import {
   DefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import RNBootSplash from 'react-native-bootsplash';
 
 const fontConfig = {
   default: {
@@ -58,9 +57,6 @@ import {UserProvider} from './src/contexts/UserContext';
 import FlashMessage from 'react-native-flash-message';
 
 const App: () => React$Node = () => {
-  useEffect(() => {
-    RNBootSplash.hide({duration: 250});
-  }, []);
   return (
     <PaperProvider theme={theme}>
       <AuthProvider>
