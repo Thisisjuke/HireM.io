@@ -6,13 +6,22 @@ import {
 import Icon from "react-native-dynamic-vector-icons";
 
 import LoginForm from "../components/LoginComponent/LoginForm";
-import { onSignIn, onSignOut } from '../services/Auth'
-import { UserContext } from "../contexts/UserContext";
-import {FmCreatedAccount, FmMissingField, FmNotMatchingPass, FmNotStrongEnoughPass, FmInvalidEmail } from "../services/FlashMessages";
+import { setUserToken } from '../services/Auth'
+import { AuthContext } from "../contexts/AuthContext";
+import {
+  FmCreatedAccount,
+  FmMissingField,
+  FmNotMatchingPass,
+  FmNotStrongEnoughPass,
+  FmInvalidEmail,
+  FmErrorWhileFetch,
+  FmInvalidUserCredential
+} from "../services/FlashMessages";
 import { checkPassword, checkEmail } from "../services/RegexChecker";
+import { createUser, logUser } from "../api/User";
 
-const LoginScreen = ({navigation}) => {
-  const [authenticated, setAuthenticated] = useContext(UserContext);
+const LoginScreen = () => {
+  const [authenticated, setAuthenticated] = useContext(AuthContext);
 
   const [isLoading, setLoading] = useState(false);
   const [isLogging, setLogging] = useState(true);
@@ -24,12 +33,29 @@ const LoginScreen = ({navigation}) => {
 
   const submitLogin = () => {
     setLoading(true)
-    alert(`${email}, ${password}, ${repeatPassword}`)
-    setTimeout( () => {
-      //onSignIn({jwt:"yoyo"})
-      //setAuthenticated({jwt:"yoyo"})
+    if(email === null || password === null){
+      FmMissingField()
       setLoading(false)
-    }, 2000)
+      return
+    }
+    if(!checkEmail(email)){
+      FmInvalidEmail()
+      setLoading(false)
+      return
+    }
+    logUser(
+      { email, password },
+      res => {
+        setLoading(false)
+        setUserToken(res.token)
+        setAuthenticated(res)
+      },
+      () => {
+        FmInvalidUserCredential()
+        setPassword(null)
+        setLoading(false)
+      }
+    )
   }
 
   const submitRegister = () => {
@@ -54,27 +80,22 @@ const LoginScreen = ({navigation}) => {
       setLoading(false)
       return
     }
-    const fetchData = {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-        recruiter: isCheckedSwitch
-      }),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }
-    fetch('http://localhost:3000/users', fetchData)
-      .then(response => response.json())
-      .then(json => {
-        console.log(json)
+    createUser(
+      { email, password, recruiter: isCheckedSwitch },
+      () => {
         FmCreatedAccount()
+        setPassword(null)
+        setEmail(null)
+        setRepeatPassword(null)
         setLogging(true)
         setLoading(false)
         setPassword(null)
-      })
+      },
+      () => {
+        FmErrorWhileFetch()
+        setLoading(false)
+      }
+    )
   }
 
   return <>

@@ -6,12 +6,12 @@ import HomeScreen from "../screens/HomeScreen";
 import IdleScreen from "../screens/IdleScreen";
 
 import { isSignedIn } from "../services/Auth"
-import { UserContext } from "../contexts/UserContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Stack = createStackNavigator();
 
 const navigation = () => {
-  const [authenticated, setAuthenticated] = useContext(UserContext);
+  const [authenticated, setAuthenticated] = useContext(AuthContext);
 
   isSignedIn().then(res => setAuthenticated(!!res))
 

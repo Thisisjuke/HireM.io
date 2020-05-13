@@ -30,3 +30,20 @@ export const FmInvalidEmail = () => showMessage({
   type: "danger",
 });
 
+export const FmErrorWhileFetch = () => showMessage({
+  message: "Oops... Something wrong happened.",
+  description: "Please retry or verify that your phone is connected to internet.",
+  type: "danger",
+});
+
+export const FmLoginSessionExpired = () => showMessage({
+  message: "Your session has expired.",
+  description: "Please log you again.",
+  type: "danger",
+});
+
+export const FmInvalidUserCredential = () => showMessage({
+  message: "Wrong email and password combination.",
+  description: "Please verify your email and password.",
+  type: "warning",
+});
