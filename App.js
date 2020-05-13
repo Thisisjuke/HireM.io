@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Navigation from "./src/navigation";
 import { UserProvider } from "./src/contexts/UserContext";
+import FlashMessage from "react-native-flash-message";
 
 const App: () => React$Node = () => {
   return (
@@ -19,6 +20,7 @@ const App: () => React$Node = () => {
       <NavigationContainer>
         <Navigation />
       </NavigationContainer>
+      <FlashMessage floating={true} duration={3000}/>
     </UserProvider>
   );
 };

@@ -40,6 +40,7 @@ const Card = props => {
             selectionColor={selectionColor}
             onChangeText={v => onChangeText(v)}
             style={textStyle || _textInputStyle(textColor)}
+            value={value}
             {...props}
           />
         </View>

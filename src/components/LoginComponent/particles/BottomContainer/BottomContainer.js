@@ -4,6 +4,7 @@ import { Switch, Text, View } from "react-native";
 import Card from "../Card/Card";
 import Icon from "react-native-dynamic-vector-icons";
 import styles, { container } from "./BottomContainer.style";
+import LoginForm from "../../LoginForm";
 
 const BottomContainer = props => {
   const {
@@ -25,15 +26,17 @@ const BottomContainer = props => {
     passwordOnChangeText,
     usernameIconComponent,
     passwordIconComponent,
-    usernameTextInputValue,
-    passwordTextInputValue,
     repeatPasswordTitle,
-    repeatPasswordTextInputValue,
     repeatPasswordPlaceholder,
     repeatPasswordIconComponent,
     usernameUpdateInput,
     passwordUpdateInput,
     repeatPasswordUpdateInput,
+
+    usernameInputValue,
+    passwordInputValue,
+    repeatPasswordInputValue,
+
     onSignupClick,
     type
   } = props;
@@ -43,10 +46,11 @@ const BottomContainer = props => {
       <View style={styles.containerGlue}>
         <Card
           title={usernameTitle}
-          value={usernameTextInputValue}
+          value={usernameInputValue}
           placeholder={usernamePlaceholder}
           iconComponent={usernameIconComponent}
           onChangeText={usernameUpdateInput}
+          autoCompleteType="email"
           {...props}
         />
         <Card
@@ -54,7 +58,7 @@ const BottomContainer = props => {
           secureTextEntry
           type="FontAwesome"
           title={passwordTitle}
-          value={passwordTextInputValue}
+          value={passwordInputValue}
           placeholder={passwordPlaceholder}
           iconComponent={passwordIconComponent}
           onChangeText={passwordUpdateInput}
@@ -66,7 +70,7 @@ const BottomContainer = props => {
           secureTextEntry
           type="FontAwesome"
           title={repeatPasswordTitle}
-          value={repeatPasswordTextInputValue}
+          value={repeatPasswordInputValue}
           placeholder={repeatPasswordPlaceholder}
           iconComponent={repeatPasswordIconComponent}
           onChangeText={repeatPasswordUpdateInput}
