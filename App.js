@@ -6,16 +6,14 @@
 import 'react-native-gesture-handler';
 
 import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {exact} from 'prop-types';
 
 import {
   configureFonts,
   DefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
-
 import RNBootSplash from 'react-native-bootsplash';
-import {exact} from 'prop-types';
 
 const fontConfig = {
   default: {
@@ -47,7 +45,7 @@ const theme = {
     ...DefaultTheme.colors,
     primary: '#0062ff',
     accent: '#50b5ff',
-    background: '#000000',
+    background: '#fafafb',
     text: '#171725',
     placeholder: '#b5b5be',
   },
@@ -67,9 +65,7 @@ const App: () => React$Node = () => {
     <PaperProvider theme={theme}>
       <AuthProvider>
         <UserProvider>
-          <NavigationContainer>
-            <Navigation />
-          </NavigationContainer>
+          <Navigation />
           <FlashMessage floating={true} duration={3000} />
         </UserProvider>
       </AuthProvider>

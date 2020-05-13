@@ -1,44 +1,40 @@
-import React, { useContext } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, {useContext} from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
 
-import LoginScreen from "../screens/LoginScreen";
-import HomeScreen from "../screens/HomeScreen";
-import IdleScreen from "../screens/IdleScreen";
+import LoginScreen from '../screens/LoginScreen';
+import IdleScreen from '../screens/IdleScreen';
+import BottomBarNavigator from '../components/BottomBarNavigator/BottomBarNavigator';
 
-import { isSignedIn } from "../services/Auth"
-import { AuthContext } from "../contexts/AuthContext";
+import {isSignedIn} from '../services/Auth';
+import {AuthContext} from '../contexts/AuthContext';
 
 const Stack = createStackNavigator();
 
 const navigation = () => {
   const [authenticated, setAuthenticated] = useContext(AuthContext);
+  isSignedIn().then(res => setAuthenticated(!!res));
 
-  isSignedIn().then(res => setAuthenticated(!!res))
-
-  return(
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false
-        }}
-      >
-        {
-          authenticated === null ? (
-            <>
-              <Stack.Screen name="Idle" component={IdleScreen} />
-            </>
-          ) : (
-            authenticated ? (
-                <>
-                  <Stack.Screen name="Home" component={HomeScreen} />
-                </>
-              ) : (
-                <>
-                  <Stack.Screen name="Login" component={LoginScreen}/>
-                </>
-            )
-          )
-        }
-      </Stack.Navigator>
+  return (
+    <NavigationContainer>
+      {authenticated === null ? (
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Idle" component={IdleScreen} />
+        </Stack.Navigator>
+      ) : authenticated ? (
+        <BottomBarNavigator />
+      ) : (
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+        </Stack.Navigator>
+      )}
+    </NavigationContainer>
   );
 };
 
