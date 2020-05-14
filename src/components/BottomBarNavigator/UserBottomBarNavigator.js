@@ -6,7 +6,9 @@ import {useTheme} from 'react-native-paper';
 
 import MyOffersScreen from '../../screens/Offers/MyOffers/MyOffersScreen';
 import SingleOfferScreen from '../../screens/Offers/SingleOffer/SingleOfferScreen';
-import CreateOfferScreen from '../../screens/Offers/CreateOffer/CreateOfferScreen';
+import CreateOfferScreen from "../../screens/Offers/CreateOffer/CreateOfferScreen";
+import CreateApplicationScreen from "../../screens/Applications/CreateApplication/CreateApplicationScreen";
+import UserProfileScreen from "../../screens/UserProfile/UserProfileScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -30,7 +32,7 @@ export const UserBottomBarNavigator = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Feed"
       shifting={true}
       sceneAnimationEnabled={false}
       activeColor={theme.colors.primary}
@@ -48,12 +50,30 @@ export const UserBottomBarNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Login"
-        component={CreateOfferScreen}
+        name="OffersList"
+        component={MyOffersScreen}
         options={{
-          tabBarLabel: 'Créer une offre',
+          tabBarLabel: 'Mes offres',
+          tabBarColor: tabBarColor,
+          tabBarIcon: 'format-list-bulleted',
+        }}
+      />
+      <Tab.Screen
+        name="CreateApplication"
+        component={CreateApplicationScreen}
+        options={{
+          tabBarLabel: 'Appliquer',
           tabBarColor: tabBarColor,
           tabBarIcon: 'email-outline',
+        }}
+      />
+      <Tab.Screen
+        name="UserProfile"
+        component={UserProfileScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarColor: tabBarColor,
+          tabBarIcon: 'account-circle',
         }}
       />
     </Tab.Navigator>

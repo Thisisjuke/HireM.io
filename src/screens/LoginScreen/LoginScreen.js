@@ -77,7 +77,7 @@ const LoginScreen = () => {
       return;
     }
     createUser(
-      {email, password, recruiter: isCheckedSwitch},
+      {email, password, isRecruiter: isCheckedSwitch},
       () => {
         FmCreatedAccount();
         setPassword(null);

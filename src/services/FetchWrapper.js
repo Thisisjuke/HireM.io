@@ -6,19 +6,22 @@ const HEADERS_DEFAULT = {
   'Content-Type': 'application/json',
 }
 
-const BACKEND_URL = "http://localhost:3000"
+const BACKEND_URL = "https://glacial-crag-23937.herokuapp.com/"
 
-export const wrappedFetch = async (url, f, c = () => {}, e = () => {}) => {
+export const wrappedFetch = async (url, f, c = () => {}, e = () => {}, authorization = true) => {
   f.body = JSON.stringify(f.body)
   f.headers = HEADERS_DEFAULT
-  f.headers['Authorization'] = await getUserToken()
 
-  request(url, f)
-    .then(res => c(res))
-    .catch(err => {
-      e()
-      console.log(err)
-    })
+  getUserToken().then(token => {
+    if(authorization) f.headers['Authorization'] = `Bearer ${token}`
+
+    request(url, f)
+      .then(res => c(res))
+      .catch(err => {
+        e()
+        console.log(err)
+      })
+  })
 }
 
 function parseJSON(response) {
@@ -35,6 +38,7 @@ function request(url, options) {
     fetch(`${url}`, options)
       .then(parseJSON)
       .then((response) => {
+        console.log(response)
         if (response.ok) {
           return resolve(response.json);
         }
