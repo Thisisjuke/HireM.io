@@ -47,3 +47,15 @@ export const FmInvalidUserCredential = () => showMessage({
   description: "Please verify your email and password.",
   type: "warning",
 });
+
+export const FmErrorCreatingOffer = () => showMessage({
+  message: "Oops.. Something went.",
+  description: "A problem occurred while creating your offer.",
+  type: "danger",
+});
+
+export const FmCreatedOffer = () => showMessage({
+  message: "Your Offer has been created !",
+  description: "You can retrieve it in your offer list.",
+  type: "success",
+});
