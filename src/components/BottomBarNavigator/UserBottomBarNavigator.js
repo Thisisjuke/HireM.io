@@ -6,63 +6,57 @@ import {useTheme} from 'react-native-paper';
 
 import MyOffersScreen from '../../screens/Offers/MyOffers/MyOffersScreen';
 import SingleOfferScreen from '../../screens/Offers/SingleOffer/SingleOfferScreen';
-import CreateOfferScreen from "../../screens/Offers/CreateOffer/CreateOfferScreen";
+import CreateOfferScreen from '../../screens/Offers/CreateOffer/CreateOfferScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
 const OfferListStack = createStackNavigator();
 
-function UserBottomBarNavigator() {
+function OfferListStackScreen() {
   return (
     <OfferListStack.Navigator>
       <OfferListStack.Screen name="OffersList" component={MyOffersScreen} />
-      <OfferListStack.Screen name="SingleOfferScreen" component={SingleOfferScreen} />
+      <OfferListStack.Screen
+        name="SingleOfferScreen"
+        component={SingleOfferScreen}
+      />
     </OfferListStack.Navigator>
   );
 }
 
-export const RecruiterBottomBarNavigation = () => {
+export const UserBottomBarNavigator = () => {
   const theme = useTheme();
   const tabBarColor = theme.colors.background;
 
   return (
-      <Tab.Navigator
-        initialRouteName="Feed"
-        shifting={true}
-        sceneAnimationEnabled={false}
-        activeColor={theme.colors.primary}
-        inactiveColor={color(theme.colors.primary)
-          .alpha(0.6)
-          .rgb()
-          .string()}>
-        <Tab.Screen
-          name="Home"
-          component={OfferListStackScreen}
-          options={{
-            tabBarLabel: 'Accueil',
-            tabBarColor: tabBarColor,
-            tabBarIcon: 'home',
-          }}
-        />
-        <Tab.Screen
-          name="OffersList"
-          component={MyOffersScreen}
-          options={{
-            tabBarLabel: 'Mes offres',
-            tabBarColor: tabBarColor,
-            tabBarIcon: 'format-list-bulleted',
-          }}
-        />
-        <Tab.Screen
-          name="CreateOffer"
-          component={CreateOfferScreen}
-          options={{
-            tabBarLabel: 'Créer une offre',
-            tabBarColor: tabBarColor,
-            tabBarIcon: 'email-outline',
-          }}
-        />
-      </Tab.Navigator>
+    <Tab.Navigator
+      initialRouteName="Home"
+      shifting={true}
+      sceneAnimationEnabled={false}
+      activeColor={theme.colors.primary}
+      inactiveColor={color(theme.colors.primary)
+        .alpha(0.6)
+        .rgb()
+        .string()}>
+      <Tab.Screen
+        name="Home"
+        component={OfferListStackScreen}
+        options={{
+          tabBarLabel: 'Accueil',
+          tabBarColor: tabBarColor,
+          tabBarIcon: 'home',
+        }}
+      />
+      <Tab.Screen
+        name="Login"
+        component={CreateOfferScreen}
+        options={{
+          tabBarLabel: 'Créer une offre',
+          tabBarColor: tabBarColor,
+          tabBarIcon: 'email-outline',
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 

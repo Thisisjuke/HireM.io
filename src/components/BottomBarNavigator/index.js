@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from 'react';
-import RecruiterBottomBarNavigation from "./RecruiterBottomBarNavigator";
-import IdleScreen from "../../screens/IdleScreen";
+import IdleScreen from "../../screens/IdleScreen/IdleScreen";
 import {AuthContext} from "../../contexts/AuthContext";
 import {UserContext} from "../../contexts/UserContext";
 import {getUserInfo} from "../../api/User";
+import RecruiterBottomBarNavigation from "./RecruiterBottomBarNavigator";
 import UserBottomBarNavigator from "./UserBottomBarNavigator";
 
 export const BottomBarNavigator = () => {
