@@ -1,9 +1,9 @@
 import React, {useContext, useState} from 'react';
 import {SafeAreaView, ScrollView, StatusBar} from 'react-native';
 
-import LoginForm from '../components/LoginComponent/LoginForm';
-import {setUserToken} from '../services/Auth';
-import {AuthContext} from '../contexts/AuthContext';
+import LoginForm from '../../components/LoginComponent/LoginForm';
+import {setUserToken} from '../../services/Auth';
+import {AuthContext} from '../../contexts/AuthContext';
 import {
   FmCreatedAccount,
   FmMissingField,
@@ -12,9 +12,9 @@ import {
   FmInvalidEmail,
   FmErrorWhileFetch,
   FmInvalidUserCredential,
-} from '../services/FlashMessages';
-import {checkPassword, checkEmail} from '../services/RegexChecker';
-import {createUser, logUser} from '../api/User';
+} from '../../services/FlashMessages';
+import {checkPassword, checkEmail} from '../../services/RegexChecker';
+import {createUser, logUser} from '../../api/User';
 
 const LoginScreen = () => {
   const [authenticated, setAuthenticated] = useContext(AuthContext);

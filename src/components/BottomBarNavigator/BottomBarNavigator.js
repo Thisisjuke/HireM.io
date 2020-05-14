@@ -2,21 +2,25 @@ import React from 'react';
 import color from 'color';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {useTheme} from 'react-native-paper';
+import {useTheme, Portal, FAB} from 'react-native-paper';
+import {useIsFocused} from '@react-navigation/native';
 
-import LoginScreen from '../../screens/LoginScreen';
+import LoginScreen from '../../screens/LoginScreen/LoginScreen';
 import MyOffersScreen from '../../screens/Offers/MyOffers/MyOffersScreen';
 import SingleOfferScreen from '../../screens/Offers/SingleOffer/SingleOfferScreen';
+import IdleScreen from '../../screens/IdleScreen/IdleScreen';
 
 const Tab = createMaterialBottomTabNavigator();
-
 const OfferListStack = createStackNavigator();
 
 function OfferListStackScreen() {
   return (
     <OfferListStack.Navigator>
       <OfferListStack.Screen name="OffersList" component={MyOffersScreen} />
-      <OfferListStack.Screen name="SingleOfferScreen" component={SingleOfferScreen} />
+      <OfferListStack.Screen
+        name="SingleOfferScreen"
+        component={SingleOfferScreen}
+      />
     </OfferListStack.Navigator>
   );
 }
@@ -25,11 +29,13 @@ function OfferListStackScreen() {
 
 export const BottomBarNavigator = () => {
   const theme = useTheme();
+  const isFocused = useIsFocused();
   const tabBarColor = theme.colors.background;
 
   return (
+    <>
       <Tab.Navigator
-        initialRouteName="Feed"
+        initialRouteName="Accueil"
         shifting={true}
         sceneAnimationEnabled={false}
         activeColor={theme.colors.primary}
@@ -57,7 +63,7 @@ export const BottomBarNavigator = () => {
         />
         <Tab.Screen
           name="Login"
-          component={LoginScreen}
+          component={IdleScreen}
           options={{
             tabBarLabel: 'Créer une offre',
             tabBarColor: tabBarColor,
@@ -65,6 +71,18 @@ export const BottomBarNavigator = () => {
           }}
         />
       </Tab.Navigator>
+      <Portal>
+        <FAB
+          visible={isFocused}
+          icon="feather"
+          style={{
+            position: 'absolute',
+            bottom: safeArea.bottom + 65,
+            right: 16,
+          }}
+        />
+      </Portal>
+    </>
   );
 };
 
