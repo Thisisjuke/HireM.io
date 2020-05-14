@@ -2,8 +2,8 @@ import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-import LoginScreen from '../screens/LoginScreen';
-import IdleScreen from '../screens/IdleScreen';
+import LoginScreen from '../screens/LoginScreen/LoginScreen';
+import IdleScreen from '../screens/IdleScreen/IdleScreen';
 import BottomBarNavigator from '../components/BottomBarNavigator/BottomBarNavigator';
 
 import {isSignedIn} from '../services/Auth';

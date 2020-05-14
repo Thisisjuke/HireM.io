@@ -1,24 +1,18 @@
-import React from "react";
-import { Text, View } from "react-native";
-import Icon from "react-native-dynamic-vector-icons";
-import styles from "./Logo.style";
+import React from 'react';
+import {StyledContainer, StyledText, StyledBrandingIcon} from './styles';
 
 const Logo = props => {
-  const { logoText } = props;
+  const {logoText} = props;
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <Text style={styles.textStyle}>{logoText}</Text>
-        <View style={styles.iconStyle}>
-          <Icon
-            size={30}
-            name="compass-alt"
-            color="white"
-            type="Fontisto"
-          />
-        </View>
-      </View>
-    </View>
+    <StyledContainer>
+      <StyledText>{logoText}</StyledText>
+      <StyledBrandingIcon
+        size={32}
+        name="account-circle-outline"
+        color="white"
+        type="MaterialCommunityIcons"
+      />
+    </StyledContainer>
   );
 };
 

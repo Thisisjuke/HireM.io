@@ -31,7 +31,7 @@ export const MyOffersScreen = () => {
                     <IconButton
                       icon="open-in-new"
                       color="#0062ff"
-                      size={20}
+                      size={24}
                       onPress={() => navigation.navigate('SingleOfferScreen')}
                     />
                   )}
