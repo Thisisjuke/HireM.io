@@ -4,7 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { UserContext } from "../contexts/UserContext";
 import { getUserInfo } from "../api/User";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [authenticated, setAuthenticated] = useContext(AuthContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
 
@@ -24,7 +24,8 @@ const HomeScreen = () => {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>{JSON.stringify(userInfo)}</Text>
       <Button
-        title="Iam the home"
+        onPress={navigation.navigate('Invite')}
+        title="To invite page"
       />
     </View>
   );

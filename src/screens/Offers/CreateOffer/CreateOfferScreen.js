@@ -1,18 +1,39 @@
-import * as React from 'react';
+import React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import {StyledView} from './styles';
 import {Headline} from 'react-native-paper';
+import {StyledView} from './styles';
+import {CreateOfferForm} from '../../../components/Forms/CreateOfferForm';
+import {createOffer} from '../../../api/Offer';
 
-export const SingleOfferScreen = () => {
+import {
+  FmCreatedOffer,
+  FmErrorCreatingOffer,
+} from '../../../services/FlashMessages';
+
+const CreateOfferScreen = () => {
   return (
     <SafeAreaView>
       <ScrollView>
         <StyledView>
           <Headline>CreateOfferSingle</Headline>
+          <CreateOfferForm onFormSubmit={createOfferFormSubmit} />
         </StyledView>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default SingleOfferScreen;
+const createOfferFormSubmit = values => {
+  createOffer(
+    values,
+    res => {
+      console.log(res);
+      FmCreatedOffer();
+    },
+    () => {
+      FmErrorCreatingOffer();
+    },
+  );
+};
+
+export default CreateOfferScreen;
