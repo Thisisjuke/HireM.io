@@ -4,18 +4,23 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {useTheme} from 'react-native-paper';
 
+// import LoginScreen from '../../screens/LoginScreen/LoginScreen';
 import MyOffersScreen from '../../screens/Offers/MyOffers/MyOffersScreen';
 import SingleOfferScreen from '../../screens/Offers/SingleOffer/SingleOfferScreen';
 import CreateOfferScreen from '../../screens/Offers/CreateOffer/CreateOfferScreen';
+import ListOfferScreen from '../../screens/Offers/ListOffer/ListOfferScreen';
 
 const Tab = createMaterialBottomTabNavigator();
-
 const OfferListStack = createStackNavigator();
 
 function OfferListStackScreen() {
   return (
     <OfferListStack.Navigator>
-      <OfferListStack.Screen name="ListOffers" component={MyOffersScreen} />
+      <OfferListStack.Screen
+        name="ListOffers"
+        component={ListOfferScreen}
+        options={{tabBarVisible: false}}
+      />
       <OfferListStack.Screen
         name="SingleOfferScreen"
         component={SingleOfferScreen}
@@ -24,6 +29,8 @@ function OfferListStackScreen() {
     </OfferListStack.Navigator>
   );
 }
+
+// À changer en fonction du type d'utilisateur
 
 export const RecruiterBottomBarNavigation = () => {
   const theme = useTheme();
