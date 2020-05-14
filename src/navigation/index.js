@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import IdleScreen from '../screens/IdleScreen/IdleScreen';
-import BottomBarNavigator from '../components/BottomBarNavigator/BottomBarNavigator';
+import BottomBarNavigator from '../components/BottomBarNavigator';
 
 import {isSignedIn} from '../services/Auth';
 import {AuthContext} from '../contexts/AuthContext';

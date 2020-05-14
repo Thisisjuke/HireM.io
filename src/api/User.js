@@ -1,4 +1,6 @@
+import jwt_decode from "jwt-decode";
 import {wrappedFetch} from "../services/FetchWrapper";
+import {getUserToken} from "../services/Auth";
 
 export const createUser = (data, callback, onError = () => {}) => {
   const f = { method: "POST", body: data }
@@ -14,6 +16,11 @@ export const logUser = (data, callback, onError = () => {}) => {
 }
 
 export const getUserInfo = (callback, onError = () => {}) => {
-  return wrappedFetch(`https://5ebbff84f2cfeb001697d4e3.mockapi.io/user`, {}, callback, onError)
-  //return wrappedFetch(`/user/me`, {}, callback, onError)
+  getUserToken()
+    .then(token => {
+      const decoded = jwt_decode(token)
+
+      return wrappedFetch(`https://5ebbff84f2cfeb001697d4e3.mockapi.io/user`, {}, callback, onError)
+      //return wrappedFetch(`/user/${decoded.id}`, {}, callback, onError)
+    })
 }
