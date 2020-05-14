@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Spinner from 'react-native-spinkit';
 import {Text, View, SafeAreaView, KeyboardAvoidingView} from 'react-native';
 
 import {
-  StyledSpinner,
+  StyledSpinnerView,
   StyledTouchable,
   StyledTouchableRegister,
   StyledLoggingButton,
@@ -20,7 +21,6 @@ const LoginForm = props => {
     spinnerColor,
     onPressLogin,
     onPressRegister,
-    spinnerStyle,
     spinnerEnable,
     spinnerVisibility,
     loginButtonBackgroundColor,
@@ -28,15 +28,14 @@ const LoginForm = props => {
   } = props;
 
   const renderSpinner = () => (
-    <StyledSpinner>
+    <StyledSpinnerView>
       <Spinner
         size={spinnerSize}
         type={spinnerType}
-        style={spinnerStyle}
         color={spinnerColor}
         isVisible={spinnerVisibility}
       />
-    </StyledSpinner>
+    </StyledSpinnerView>
   );
 
   const renderLoginButton = () => (
@@ -61,6 +60,7 @@ const LoginForm = props => {
   return (
     <KeyboardAvoidingView
       behavior="position"
+      keyboardVerticalOffset="-140"
       style={container(loginButtonBackgroundColor)}>
       <View style={container(loginButtonBackgroundColor)}>
         <SafeAreaView>
