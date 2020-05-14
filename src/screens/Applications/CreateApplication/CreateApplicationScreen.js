@@ -1,13 +1,14 @@
 import React from 'react';
 import { Text, View } from "react-native";
 import {createOffer} from "../../../api/Offer";
-import {FmCreatedOffer, FmErrorCreatingOffer} from "../../../services/FlashMessages";
+import {FmCreatedApplication, FmErrorCreatingApplication} from "../../../services/FlashMessages";
 import {CreateApplicationForm} from "../../../components/Forms/CreateApplicationForm";
+import dayjs from "dayjs";
 
 const CreateApplicationScreen = () => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Add offer</Text>
+      <Text>Apply</Text>
       <CreateApplicationForm
         onFormSubmit={createApplicationFormSubmit}
       />
@@ -16,14 +17,15 @@ const CreateApplicationScreen = () => {
 }
 
 const createApplicationFormSubmit = values => {
+  values['age'] = parseInt(dayjs(new Date).format('YYYY')) - parseInt(dayjs(values.age).format('YYYY'))
   createOffer(
     values,
     res => {
       console.log(res)
-      FmCreatedOffer()
+      FmCreatedApplication()
     },
     () => {
-      FmErrorCreatingOffer()
+      FmErrorCreatingApplication()
     }
   )
 }

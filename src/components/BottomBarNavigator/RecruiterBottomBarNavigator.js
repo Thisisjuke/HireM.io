@@ -29,8 +29,6 @@ function OfferListStackScreen() {
   );
 }
 
-// À changer en fonction du type d'utilisateur
-
 export const RecruiterBottomBarNavigation = () => {
   const theme = useTheme();
   const tabBarColor = theme.colors.background;
