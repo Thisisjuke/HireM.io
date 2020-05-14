@@ -18,14 +18,8 @@ function OfferListStackScreen() {
     <OfferListStack.Navigator>
       <OfferListStack.Screen
         name="ListOffers"
-        options={{
-          headerTitle: 'Toutes vos offres',
-          headerTitleStyle: {
-            fontFamily: 'Poppins-Medium',
-            fontSize: 18,
-          },
-        }}
         component={ListOfferScreen}
+        options={{tabBarVisible: false}}
       />
       <OfferListStack.Screen
         name="SingleOfferScreen"

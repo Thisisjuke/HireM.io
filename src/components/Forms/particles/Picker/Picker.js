@@ -9,10 +9,10 @@ export const Picker = props => {
         style={{
           fontFamily: 'Poppins-Regular',
           height: 24,
-          paddingLeft: 40,
+          paddingLeft: 24,
           color: '#92929d',
         }}
-      />
+      >{props.children}</StyledPicker>
     </StyledView>
   );
 };
