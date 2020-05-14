@@ -1,10 +1,10 @@
 import React, {useContext, useEffect} from 'react';
-import IdleScreen from "../../screens/IdleScreen/IdleScreen";
-import {AuthContext} from "../../contexts/AuthContext";
-import {UserContext} from "../../contexts/UserContext";
-import {getUserInfo} from "../../api/User";
-import RecruiterBottomBarNavigation from "./RecruiterBottomBarNavigator";
-import UserBottomBarNavigator from "./UserBottomBarNavigator";
+import IdleScreen from '../../screens/IdleScreen/IdleScreen';
+import {AuthContext} from '../../contexts/AuthContext';
+import {UserContext} from '../../contexts/UserContext';
+import {getUserInfo} from '../../api/User';
+import RecruiterBottomBarNavigation from './RecruiterBottomBarNavigator';
+import UserBottomBarNavigator from './UserBottomBarNavigator';
 
 export const BottomBarNavigator = () => {
   const [authenticated, setAuthenticated] = useContext(AuthContext);
@@ -13,26 +13,26 @@ export const BottomBarNavigator = () => {
   useEffect(() => {
     getUserInfo(
       info => {
-        setUserInfo(info)
-        console.log("mes infos", info)
+        setUserInfo(info);
+        console.log('mes infos', info);
       },
       () => {
-        setAuthenticated(false)
-      }
-    )
-  }, [])
+        setAuthenticated(false);
+      },
+    );
+  }, []);
 
-  return(
+  return (
     <>
       {userInfo === null ? (
         <IdleScreen />
       ) : userInfo.isRecruiter ? (
-        <RecruiterBottomBarNavigation />
-      ) : (
         <UserBottomBarNavigator />
+      ) : (
+        <RecruiterBottomBarNavigation />
       )}
     </>
-  )
+  );
 };
 
 export default BottomBarNavigator;
