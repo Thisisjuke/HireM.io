@@ -1,37 +1,47 @@
 import * as React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-import {List} from 'react-native-paper';
-import {StyledView, StyledCard} from './styles';
+import {Headline, Caption, Paragraph, Button, Text} from 'react-native-paper';
+import {
+  StyledView,
+  StyledSubheading,
+  StyledCard,
+  StyledInvertedButton,
+} from './styles';
 
 export const SingleOfferScreen = () => {
-  state = {
-    expanded: true,
-  };
-
-  _handlePress = () =>
-    this.setState({
-      expanded: !this.state.expanded,
-    });
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView>
       <ScrollView>
         <StyledView>
-          <List.Section title="Toutes mes offres">
-            <StyledCard>
-              <List.Accordion title="Offres statut 2">
-                <List.Item title="First item" />
-                <List.Item title="Second item" />
-              </List.Accordion>
-            </StyledCard>
-            <StyledCard>
-              <List.Accordion title="Offres statut 3">
-                <List.Item title="First item" />
-                <List.Item title="Second item" />
-              </List.Accordion>
-            </StyledCard>
-          </List.Section>
+          <Headline>Titre de l'offre</Headline>
+          <Caption>Offre publiée par...</Caption>
+          <StyledCard>
+            <StyledCard.Content>
+              <StyledSubheading>Post de l'offre...</StyledSubheading>
+              <Paragraph>Détail 1 : </Paragraph>
+              <Paragraph>Détail 2 : </Paragraph>
+              <Paragraph>Détail 3 : </Paragraph>
+              <Paragraph>Détail 4 : </Paragraph>
+            </StyledCard.Content>
+          </StyledCard>
+        </StyledView>
+
+        {/* only recruiter */}
+
+        <StyledView>
+          <Button uppercase={false} mode="contained">
+            Inviter un candidat
+          </Button>
+          <StyledInvertedButton
+            uppercase={false}
+            onPress={() => navigation.navigate('OffersScreen')}
+            mode="contained">
+            <Text style={{color: '#0062ff'}}>Voir les candidatures</Text>
+          </StyledInvertedButton>
         </StyledView>
       </ScrollView>
     </SafeAreaView>

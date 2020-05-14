@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 import {View} from 'react-native';
-import {Card, Title, Paragraph} from 'react-native-paper';
+import {Card, Subheading, Button} from 'react-native-paper';
 
 export const StyledView = styled(View)`
   margin: 16px;
+  margin-bottom: 0px;
 `;
 
 export const StyledCard = styled(Card)`
-  margin-bottom: 16px;
+  margin: 16px 4px;
 `;
 
-export const StyledTitle = styled(Title)`
-  font-size: 18px;
+export const StyledSubheading = styled(Subheading)`
+  margin-bottom: 8px;
 `;
 
-export const StyledFooter = styled(View)`
-  padding: 16px;
+export const StyledInvertedButton = styled(Button)`
+  margin-top: 12px;
+  background-color: white;
 `;
-

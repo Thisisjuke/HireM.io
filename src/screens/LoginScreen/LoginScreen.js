@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {SafeAreaView, ScrollView, StatusBar} from 'react-native';
+import {SafeAreaView, StatusBar} from 'react-native';
 
 import LoginForm from '../../components/LoginComponent/LoginForm';
 import {setUserToken} from '../../services/Auth';
