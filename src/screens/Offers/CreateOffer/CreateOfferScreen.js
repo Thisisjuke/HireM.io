@@ -1,8 +1,7 @@
 import React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import {Headline} from 'react-native-paper';
-import {StyledView} from './styles';
-import {CreateOfferForm} from '../../../components/Forms/CreateOfferForm';
+import {StyledView, StyledHeadline} from './styles';
+import {CreateOfferForm} from '../../../components/Forms/CreateOfferForm/CreateOfferForm';
 import {createOffer} from '../../../api/Offer';
 
 import {
@@ -15,7 +14,7 @@ const CreateOfferScreen = () => {
     <SafeAreaView>
       <ScrollView>
         <StyledView>
-          <Headline>CreateOfferSingle</Headline>
+          <StyledHeadline>Créez votre offre dès maintenant !</StyledHeadline>
           <CreateOfferForm onFormSubmit={createOfferFormSubmit} />
         </StyledView>
       </ScrollView>
