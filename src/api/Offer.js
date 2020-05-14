@@ -7,5 +7,20 @@ export const getOfferInfo = (id, callback, onError = () => {}) => {
 export const createOffer = (data, callback, onError = () => {}) => {
   const f = { method: "POST", body: data }
 
-  return wrappedFetch(`https://glacial-crag-23937.herokuapp.com/offer`, f, callback, onError)
+  return wrappedFetch(`https://glacial-crag-23937.herokuapp.com/offers`, f, callback, onError)
+}
+
+export const getOfferTypes = (callback, onError = () => {}) => {
+
+  return wrappedFetch(`https://glacial-crag-23937.herokuapp.com/contracts_types`, {}, callback, onError)
+}
+
+export const getMyOffers = (id, callback, onError = () => {}) => {
+
+  return wrappedFetch(`https://glacial-crag-23937.herokuapp.com/users/${id}/offers`, {}, callback, onError)
+}
+
+export const getOfferById = (id, callback, onError = () => {}) => {
+
+  return wrappedFetch(`https://glacial-crag-23937.herokuapp.com/offers/${id}`, {}, callback, onError)
 }

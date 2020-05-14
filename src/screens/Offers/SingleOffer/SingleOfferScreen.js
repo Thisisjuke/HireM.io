@@ -1,48 +1,64 @@
 import * as React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
+import dayjs from "dayjs";
 import {useNavigation} from '@react-navigation/native';
-
 import {Headline, Caption, Paragraph, Button, Text} from 'react-native-paper';
+
 import {
   StyledView,
   StyledSubheading,
   StyledCard,
   StyledInvertedButton,
 } from './styles';
+import {useContext, useEffect, useState} from "react";
+import {getOfferById} from "../../../api/Offer";
+import {UserContext} from "../../../contexts/UserContext";
 
-export const SingleOfferScreen = () => {
+export const SingleOfferScreen = ({route}) => {
+  const { offerId } = route.params;
+  console.log(offerId)
   const navigation = useNavigation();
+
+  const [userInfo, setUserInfo] = useContext(UserContext);
+  const [offer, setOffer] = useState({});
+
+  useEffect(() => {
+    getOfferById(
+      1,
+      info => {
+        setOffer(info)
+      }
+    )
+  }, [])
 
   return (
     <SafeAreaView>
       <ScrollView>
         <StyledView>
-          <Headline>Titre de l'offre</Headline>
-          <Caption>Offre publiée par...</Caption>
+          <Headline>{offer.name}</Headline>
+          <Caption>Type of contract : {offer.contractType}</Caption>
           <StyledCard>
             <StyledCard.Content>
-              <StyledSubheading>Post de l'offre...</StyledSubheading>
-              <Paragraph>Détail 1 : </Paragraph>
-              <Paragraph>Détail 2 : </Paragraph>
-              <Paragraph>Détail 3 : </Paragraph>
-              <Paragraph>Détail 4 : </Paragraph>
+              <StyledSubheading>{offer.companyDescription}</StyledSubheading>
+              <StyledSubheading>{offer.offerDescription}</StyledSubheading>
+              <Paragraph>Starts : {dayjs(offer.startDate).format('YYYY-MM-DD')}</Paragraph>
             </StyledCard.Content>
           </StyledCard>
         </StyledView>
 
-        {/* only recruiter */}
-
-        <StyledView>
-          <Button uppercase={false} mode="contained">
-            Inviter un candidat
-          </Button>
-          <StyledInvertedButton
-            uppercase={false}
-            onPress={() => navigation.navigate('OffersScreen')}
-            mode="contained">
-            <Text style={{color: '#0062ff'}}>Voir les candidatures</Text>
-          </StyledInvertedButton>
-        </StyledView>
+        {userInfo.isRecruiter === true && (
+          <StyledView>
+            <Button uppercase={false} mode="contained">
+              Invite someone
+            </Button>
+            <StyledInvertedButton
+              uppercase={false}
+              onPress={() => navigation.navigate('OffersScreen')}
+              mode="contained">
+              <Text style={{color: '#0062ff'}}>See Applications for this Offer</Text>
+            </StyledInvertedButton>
+          </StyledView>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

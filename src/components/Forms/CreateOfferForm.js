@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Button, TextInput, View, Text } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { Formik } from 'formik';
 import { DatePicker } from "./particles/DatePicker";
 import * as Yup from 'yup';
 import dayjs from "dayjs";
+import {getOfferTypes} from "../../api/Offer";
 
 export const CreateOfferForm = props => {
+  const [types, setTypes] = useState([]);
+
+  useEffect(() => {
+    getOfferTypes(
+      info => {
+        setTypes(info)
+      }
+    )
+  }, [])
+
   const {
-    onFormSubmit
+    onFormSubmit,
+    userId
   } = props
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
@@ -28,7 +40,7 @@ export const CreateOfferForm = props => {
         startDate: new Date(),
         contractType: 'cdd',
       }}
-      onSubmit={values => onFormSubmit(values)}
+      onSubmit={values => onFormSubmit(values, userId)}
       validationSchema={OfferFormSchema}
     >
       {({
@@ -83,9 +95,13 @@ export const CreateOfferForm = props => {
           {errors.startDate && touched.startDate ? (
             <Text>{errors.startDate}</Text>
           ) : null}
-          <Picker onValueChange={val => setFieldValue('contractType', val)}>
-            <Picker.Item label="CDD" value="cdd" />
-            <Picker.Item label="CDI" value="cdi" />
+          <Picker
+            selectedValue={values.contractType}
+            onValueChange={val => setFieldValue('contractType', val)}
+          >
+            {types.map((info, i) => {
+              return (<Picker.Item key={i} label={info.name} value={`/contracts_types/${info.id}`} />)
+            })}
           </Picker>
           {errors.contractType && touched.contractType ? (
             <Text>{errors.contractType}</Text>
