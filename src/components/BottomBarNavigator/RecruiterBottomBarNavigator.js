@@ -19,11 +19,17 @@ function OfferListStackScreen() {
       <OfferListStack.Screen
         name="ListOffers"
         component={ListOfferScreen}
-        options={{tabBarVisible: false}}
+        options={{
+          headerShown: false,
+        }}
       />
       <OfferListStack.Screen
         name="SingleOfferScreen"
         component={SingleOfferScreen}
+        options={{
+          headerTitle: "Détails de l'offre",
+          headerTitleStyle: {fontFamily: 'Poppins-Medium', paddingTop: 4},
+        }}
       />
       <OfferListStack.Screen name="OffersScreen" component={MyOffersScreen} />
     </OfferListStack.Navigator>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {TouchableOpacity, View} from 'react-native';
-import {Button} from "react-native-paper";
+import {Button, Headline} from 'react-native-paper';
 
 export const StyledView = styled(View)`
   margin: 16px;
@@ -18,4 +18,9 @@ export const StyledTouchable = styled(TouchableOpacity)`
 
 export const StyledLoggingButton = styled(Button)`
   background-color: white;
+`;
+
+export const StyledHeadline = styled(Headline)`
+  margin-bottom: 40px;
+  margin-top: 16px;
 `;

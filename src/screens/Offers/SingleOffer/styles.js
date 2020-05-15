@@ -4,7 +4,7 @@ import {Card, Subheading, Button} from 'react-native-paper';
 
 export const StyledView = styled(View)`
   margin: 16px;
-  margin-bottom: 0px;
+  margin-bottom:0px
 `;
 
 export const StyledCard = styled(Card)`
