@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 
 import {Text, Button} from 'react-native-paper';
 
@@ -83,9 +83,11 @@ const ListOfferScreen = () => {
   };
 
   return (
-    <StyledView>
-      {offerList.length != 0 ? <FullOffers /> : <EmptyOffers />}
-    </StyledView>
+    <ScrollView>
+      <StyledView>
+        {offerList.length != 0 ? <FullOffers /> : <EmptyOffers />}
+      </StyledView>
+    </ScrollView>
   );
 };
 

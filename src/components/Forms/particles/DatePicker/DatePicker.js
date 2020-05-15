@@ -11,6 +11,7 @@ export const DatePicker = props => {
     <>
       <StyledTouchableHighlight>
         <StyledText onPress={() => setShow(true)}>
+          Début de contrat :{' '}
           {dayjs(date)
             .add(3, 'hours')
             .format('YYYY-MM-DD')}
@@ -27,7 +28,6 @@ export const DatePicker = props => {
             onChange(v);
             setFieldValue(formValue, v);
           }}
-          {...props}
         />
       )}
     </>
