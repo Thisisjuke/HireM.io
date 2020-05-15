@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-import {StyledView} from './styles';
+import {StyledView, StyledLoggingButton, StyledTouchable} from './styles';
+import {Text, View} from 'react-native';
 import {OfferCard} from "../../../components/Offer/OfferCard";
 import {getMyOffers} from "../../../api/Offer";
 import {UserContext} from "../../../contexts/UserContext";
@@ -25,9 +26,23 @@ const ListOfferScreen = () => {
 
   return (
     <StyledView>
-      {offerList.map((info, i) => {
-        return (<OfferCard key={i} id={info.id} seeMore={seeMore} title={info.name}/>)
-      })}
+        <StyledTouchable onPress={() => {
+        getMyOffers(
+          userInfo.id,
+          info => {
+            setOfferList(info)
+          }
+        )
+      }}>
+        <StyledLoggingButton mode="contained">
+          <Text style={{color: '#0062ff'}}>Reload</Text>
+        </StyledLoggingButton>
+      </StyledTouchable>
+      <View>
+        {offerList.map((info, i) => {
+          return (<OfferCard key={i} id={info.id} seeMore={seeMore} title={info.name}/>)
+        })}
+      </View>
     </StyledView>
   );
 };
