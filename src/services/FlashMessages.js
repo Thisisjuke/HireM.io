@@ -59,3 +59,15 @@ export const FmCreatedOffer = () => showMessage({
   description: "You can retrieve it in your offer list.",
   type: "success",
 });
+
+export const FmErrorCreatingApplication = () => showMessage({
+  message: "Oops.. Something went.",
+  description: "A problem occurred while creating your application.",
+  type: "danger",
+});
+
+export const FmCreatedApplication = () => showMessage({
+  message: "Your Application has been created !",
+  description: "You can retrieve it in your offer list.",
+  type: "success",
+});

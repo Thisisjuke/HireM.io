@@ -1,52 +1,49 @@
-import React from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
-import {Button} from 'react-native-paper';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-import {
-  StyledView,
-  StyledCard,
-  StyledTitle,
-  StyledFooter,
-  StyledHeadline,
-} from './styles';
+import {StyledView, StyledLoggingButton, StyledTouchable} from './styles';
+import {Text, View} from 'react-native';
+import {OfferCard} from "../../../components/Offer/OfferCard";
+import {getMyOffers} from "../../../api/Offer";
+import {UserContext} from "../../../contexts/UserContext";
 
 const ListOfferScreen = () => {
   const navigation = useNavigation();
+  const [offerList, setOfferList] = useState([]);
+  const [userInfo, setUserInfo] = useContext(UserContext);
+
+  useEffect(() => {
+
+    getMyOffers(
+      userInfo.id,
+      info => {
+        setOfferList(info)
+      }
+    )
+  }, [])
+
+  const seeMore = id => navigation.navigate('SingleOfferScreen', {offerId: id})
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <StyledView>
-          <StyledHeadline>Voici toutes vos offres publiées :</StyledHeadline>
-          <StyledCard>
-            <StyledCard.Content>
-              <StyledTitle>Titre de l'offre</StyledTitle>
-            </StyledCard.Content>
-            <StyledFooter>
-              <Button
-                uppercase={false}
-                onPress={() => navigation.navigate('SingleOfferScreen')}
-                mode="contained">
-                Voir le détail
-              </Button>
-            </StyledFooter>
-          </StyledCard>
-
-          <StyledCard>
-            <StyledCard.Content>
-              <StyledTitle>Titre de l'offre</StyledTitle>
-            </StyledCard.Content>
-          </StyledCard>
-
-          <StyledCard>
-            <StyledCard.Content>
-              <StyledTitle>Titre de l'offre</StyledTitle>
-            </StyledCard.Content>
-          </StyledCard>
-        </StyledView>
-      </ScrollView>
-    </SafeAreaView>
+    <StyledView>
+        <StyledTouchable onPress={() => {
+        getMyOffers(
+          userInfo.id,
+          info => {
+            setOfferList(info)
+          }
+        )
+      }}>
+        <StyledLoggingButton mode="contained">
+          <Text style={{color: '#0062ff'}}>Reload</Text>
+        </StyledLoggingButton>
+      </StyledTouchable>
+      <View>
+        {offerList.map((info, i) => {
+          return (<OfferCard key={i} id={info.id} seeMore={seeMore} title={info.name}/>)
+        })}
+      </View>
+    </StyledView>
   );
 };
 

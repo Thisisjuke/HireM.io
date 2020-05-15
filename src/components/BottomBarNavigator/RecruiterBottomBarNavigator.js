@@ -4,9 +4,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {useTheme} from 'react-native-paper';
 
-// import LoginScreen from '../../screens/LoginScreen/LoginScreen';
 import MyOffersScreen from '../../screens/Offers/MyOffers/MyOffersScreen';
 import SingleOfferScreen from '../../screens/Offers/SingleOffer/SingleOfferScreen';
+import UserProfileScreen from "../../screens/UserProfile/UserProfileScreen";
 import CreateOfferScreen from '../../screens/Offers/CreateOffer/CreateOfferScreen';
 import ListOfferScreen from '../../screens/Offers/ListOffer/ListOfferScreen';
 
@@ -29,8 +29,6 @@ function OfferListStackScreen() {
     </OfferListStack.Navigator>
   );
 }
-
-// À changer en fonction du type d'utilisateur
 
 export const RecruiterBottomBarNavigation = () => {
   const theme = useTheme();
@@ -62,6 +60,15 @@ export const RecruiterBottomBarNavigation = () => {
           tabBarLabel: 'Créer une offre',
           tabBarColor: tabBarColor,
           tabBarIcon: 'email-outline',
+        }}
+      />
+      <Tab.Screen
+        name="UserProfile"
+        component={UserProfileScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarColor: tabBarColor,
+          tabBarIcon: 'account-circle',
         }}
       />
     </Tab.Navigator>

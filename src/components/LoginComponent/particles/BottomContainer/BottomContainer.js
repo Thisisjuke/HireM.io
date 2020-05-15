@@ -70,7 +70,7 @@ const BottomContainer = props => {
       <StyledFooterContainer>
         <StyledSwitchText onPress={() => onSignupClick()}>
           {type === 'login' && "Je veux m'inscrire !"}
-          {type === 'register' && 'Je veux me connecter !'}
+          {type === 'register' && 'Me connecter !'}
         </StyledSwitchText>
         {type === 'register' && (
           <StyledRmeContainer>

@@ -1,24 +1,21 @@
 import styled from 'styled-components';
-import {View} from 'react-native';
-import {Card, Title, Headline} from 'react-native-paper';
+import {TouchableOpacity, View} from 'react-native';
+import {Button} from "react-native-paper";
 
 export const StyledView = styled(View)`
   margin: 16px;
 `;
 
-export const StyledCard = styled(Card)`
+export const StyledTouchable = styled(TouchableOpacity)`
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 16px;
 `;
 
-export const StyledTitle = styled(Title)`
-  font-size: 18px;
-`;
-
-export const StyledFooter = styled(View)`
-  padding: 16px;
-`;
-
-export const StyledHeadline = styled(Headline)`
-  margin-bottom: 32px;
-  margin-top: 16px;
+export const StyledLoggingButton = styled(Button)`
+  background-color: white;
 `;
