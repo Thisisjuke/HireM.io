@@ -24,7 +24,7 @@ export const SingleOfferScreen = ({route}) => {
 
   useEffect(() => {
     getOfferById(
-      1,
+      offerId,
       info => {
         setOffer(info)
       }
@@ -36,7 +36,7 @@ export const SingleOfferScreen = ({route}) => {
       <ScrollView>
         <StyledView>
           <Headline>{offer.name}</Headline>
-          <Caption>Type of contract : {offer.contractType}</Caption>
+          <Caption>Type of contract : {offer.contractType ? offer.contractType.name : null}</Caption>
           <StyledCard>
             <StyledCard.Content>
               <StyledSubheading>{offer.companyDescription}</StyledSubheading>

@@ -17,7 +17,7 @@ export const getOfferTypes = (callback, onError = () => {}) => {
 
 export const getMyOffers = (id, callback, onError = () => {}) => {
 
-  return wrappedFetch(`https://glacial-crag-23937.herokuapp.com/users/${id}/offers`, {}, callback, onError)
+  return wrappedFetch(`https://glacial-crag-23937.herokuapp.com/users/${id}/offer_ids`, {}, callback, onError)
 }
 
 export const getOfferById = (id, callback, onError = () => {}) => {

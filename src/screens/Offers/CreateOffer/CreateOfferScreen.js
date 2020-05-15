@@ -24,7 +24,7 @@ const CreateOfferScreen = () => {
 };
 
 const createOfferFormSubmit = (values, id) => {
-  values["user"] = `/users/${id}`
+  values["user_id"] = `/users/${id}`
 
   createOffer(
     values,
