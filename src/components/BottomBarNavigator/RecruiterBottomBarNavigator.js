@@ -20,7 +20,8 @@ function OfferListStackScreen() {
         name="ListOffers"
         component={ListOfferScreen}
         options={{
-          headerShown: false,
+          headerTitle: "Toutes vos offres",
+          headerTitleStyle: {fontFamily: 'Poppins-Medium', paddingTop: 4},
         }}
       />
       <OfferListStack.Screen
@@ -60,7 +61,7 @@ export const RecruiterBottomBarNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Login"
+        name="CreateOffer"
         component={CreateOfferScreen}
         options={{
           tabBarLabel: 'Créer une offre',

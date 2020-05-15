@@ -7,13 +7,9 @@ export const StyledView = styled(View)`
 `;
 
 export const StyledTouchable = styled(TouchableOpacity)`
-  left: 0;
-  right: 0;
-  z-index: 10;
-  height: 50px;
+  z-index: 1;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
+  margin: 16px 0;
 `;
 
 export const StyledLoggingButton = styled(Button)`
@@ -23,4 +19,5 @@ export const StyledLoggingButton = styled(Button)`
 export const StyledHeadline = styled(Headline)`
   margin-bottom: 40px;
   margin-top: 16px;
+  text-align: center;
 `;
