@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { Button, TextInput, View, Text } from 'react-native';
-import { Picker } from '@react-native-community/picker';
-import { Formik } from 'formik';
+import React, {useState} from 'react';
+import {Button, TextInput, View, Text} from 'react-native';
+import {Picker} from '@react-native-community/picker';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {DatePicker} from "./particles/DatePicker";
-import dayjs from "dayjs";
+import {DatePicker} from './particles/DatePicker';
+import dayjs from 'dayjs';
 
 export const CreateApplicationForm = props => {
-  const {
-    onFormSubmit
-  } = props
+  const {onFormSubmit} = props;
   const [date, setDate] = useState(new Date('1970-01-01'));
   const [show, setShow] = useState(false);
 
@@ -22,25 +20,27 @@ export const CreateApplicationForm = props => {
   return (
     <Formik
       initialValues={{
-        name: "",
-        firstname: "",
-        gender: "",
+        name: '',
+        firstname: '',
+        gender: '',
         age: new Date('1970-01-01'),
-        address: "",
-        motivationField: "",
-        salaryWanted: "0"
+        address: '',
+        motivationField: '',
+        salaryWanted: '0',
       }}
-      onSubmit={values => onFormSubmit(values)}
-      validationSchema={ApplicationFormSchema}
-    >
+      onSubmit={(values, {resetForm}) => {
+        onFormSubmit(values);
+        resetForm();
+      }}
+      validationSchema={ApplicationFormSchema}>
       {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          setFieldValue,
-          errors,
-          touched
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        values,
+        setFieldValue,
+        errors,
+        touched,
       }) => (
         <View>
           <Text>Your last name:</Text>
@@ -50,9 +50,7 @@ export const CreateApplicationForm = props => {
             value={values.name}
             placeholder="Your name"
           />
-          {errors.name && touched.name ? (
-            <Text>{errors.name}</Text>
-          ) : null}
+          {errors.name && touched.name ? <Text>{errors.name}</Text> : null}
           <Text>Your first name:</Text>
           <TextInput
             onChangeText={handleChange('firstname')}
@@ -66,8 +64,7 @@ export const CreateApplicationForm = props => {
           <Picker
             style={{width: 150}}
             selectedValue={values.gender}
-            onValueChange={val => setFieldValue('gender', val)}
-          >
+            onValueChange={val => setFieldValue('gender', val)}>
             <Picker.Item label="Man" value="m" />
             <Picker.Item label="Woman" value="w" />
             <Picker.Item label="Other" value="o" />
@@ -84,9 +81,7 @@ export const CreateApplicationForm = props => {
             setFieldValue={setFieldValue}
             onChange={onChange}
           />
-          {errors.age && touched.age ? (
-            <Text>{errors.age}</Text>
-          ) : null}
+          {errors.age && touched.age ? <Text>{errors.age}</Text> : null}
           <TextInput
             onChangeText={handleChange('address')}
             onBlur={handleBlur('address')}
@@ -100,8 +95,8 @@ export const CreateApplicationForm = props => {
             onChangeText={handleChange('motivationField')}
             onBlur={handleBlur('motivationField')}
             value={values.motivationField}
-            multiline = {true}
-            numberOfLines = {4}
+            multiline={true}
+            numberOfLines={4}
             placeholder="Your motivation"
           />
           {errors.motivationField && touched.motivationField ? (
@@ -117,30 +112,23 @@ export const CreateApplicationForm = props => {
             <Text>{errors.salaryWanted}</Text>
           ) : null}
 
-          <Button onPress={handleSubmit} title="Submit"/>
+          <Button onPress={handleSubmit} title="Submit" />
         </View>
       )}
     </Formik>
-  )
+  );
 };
 
 const ApplicationFormSchema = Yup.object().shape({
-  name: Yup.string()
-    .required('Required'),
-  firstname: Yup.string()
-    .required('Required'),
-  gender: Yup.string()
-    .required('Required'),
+  name: Yup.string().required('Required'),
+  firstname: Yup.string().required('Required'),
+  gender: Yup.string().required('Required'),
   age: Yup.date()
-    .test('after-today', "Your birth date can't be after today.",
-      function(v) {
-        return !dayjs(v).isAfter(dayjs(), 'day')
-      })
+    .test('after-today', "Your birth date can't be after today.", function(v) {
+      return !dayjs(v).isAfter(dayjs(), 'day');
+    })
     .required('Required'),
-  address: Yup.string()
-    .required('Required'),
-  motivationField: Yup.string()
-    .required('Required'),
-  salaryWanted: Yup.string()
-    .required('Required')
+  address: Yup.string().required('Required'),
+  motivationField: Yup.string().required('Required'),
+  salaryWanted: Yup.string().required('Required'),
 });
