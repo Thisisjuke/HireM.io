@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {View} from 'react-native';
-import {Button} from 'react-native-paper';
+import {Button, Divider} from 'react-native-paper';
 import {Picker} from '@react-native-community/picker';
 
 export const StyledView = styled(View)`
@@ -18,9 +18,13 @@ export const StyledPicker = styled(Picker)`
 
 export const StyledPickerView = styled(View)`
   background-color: #fafafb;
-  margin-top: 12px;
-  margin-bottom: 28px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   border-radius: 8px;
   overflow: hidden;
   padding-left: 8px;
+`;
+
+export const StyledDivider = styled(Divider)`
+  margin-bottom: 8px;
 `;

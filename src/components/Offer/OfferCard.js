@@ -18,7 +18,7 @@ export const OfferCard = props => {
           uppercase={false}
           onPress={() => seeMore(id)}
           mode="contained">
-            See More
+            En savoir plus
         </Button>
       </StyledFooter>
     </StyledCard>

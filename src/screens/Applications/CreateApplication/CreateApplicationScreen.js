@@ -1,33 +1,41 @@
 import React from 'react';
-import { Text, View } from "react-native";
-import {createOffer} from "../../../api/Offer";
-import {FmCreatedApplication, FmErrorCreatingApplication} from "../../../services/FlashMessages";
-import {CreateApplicationForm} from "../../../components/Forms/CreateApplicationForm";
-import dayjs from "dayjs";
+import {createOffer} from '../../../api/Offer';
+import {SafeAreaView, ScrollView} from 'react-native';
+import {StyledView, StyledHeadline} from './styles';
+import {
+  FmCreatedApplication,
+  FmErrorCreatingApplication,
+} from '../../../services/FlashMessages';
+import {CreateApplicationForm} from '../../../components/Forms/CreateApplicationForm/CreateApplicationForm';
+import dayjs from 'dayjs';
 
 const CreateApplicationScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Apply</Text>
-      <CreateApplicationForm
-        onFormSubmit={createApplicationFormSubmit}
-      />
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <StyledView>
+          <StyledHeadline>Faîtes votre candidature :</StyledHeadline>
+          <CreateApplicationForm onFormSubmit={createApplicationFormSubmit} />
+        </StyledView>
+      </ScrollView>
+    </SafeAreaView>
   );
-}
+};
 
 const createApplicationFormSubmit = values => {
-  values['age'] = parseInt(dayjs(new Date).format('YYYY')) - parseInt(dayjs(values.age).format('YYYY'))
+  values['age'] =
+    parseInt(dayjs(new Date()).format('YYYY')) -
+    parseInt(dayjs(values.age).format('YYYY'));
   createOffer(
     values,
     res => {
-      console.log(res)
-      FmCreatedApplication()
+      console.log(res);
+      FmCreatedApplication();
     },
     () => {
-      FmErrorCreatingApplication()
-    }
-  )
-}
+      FmErrorCreatingApplication();
+    },
+  );
+};
 
 export default CreateApplicationScreen;

@@ -1,19 +1,33 @@
-import React, {useState} from 'react';
-import {Text} from 'react-native-paper';
+import React, {useState, useEffect} from 'react';
 
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import dayjs from 'dayjs';
+import {Text} from 'react-native-paper';
+
+import {getOfferTypes} from '../../../api/Offer';
 
 import {DatePicker} from '../particles/DatePicker/DatePicker';
-import {Picker} from '../particles/Picker/Picker'
 import {TextInput} from '../particles/TextInput/TextInput';
 import {MultilineTextInput} from '../particles/MultilineTextInput/MultilineTextInput';
 
-import {StyledView, StyledButton} from './styles';
+import {
+  StyledView,
+  StyledButton,
+  StyledPicker,
+  StyledPickerView,
+} from './styles';
 
 export const CreateOfferForm = props => {
-  const {onFormSubmit} = props;
+  const [types, setTypes] = useState([]);
+
+  useEffect(() => {
+    getOfferTypes(info => {
+      setTypes(info);
+    });
+  }, []);
+
+  const {onFormSubmit, userId} = props;
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
@@ -32,7 +46,7 @@ export const CreateOfferForm = props => {
         startDate: new Date(),
         contractType: 'cdd',
       }}
-      onSubmit={values => onFormSubmit(values)}
+      onSubmit={values => onFormSubmit(values, userId)}
       validationSchema={OfferFormSchema}>
       {({
         handleChange,
@@ -80,14 +94,33 @@ export const CreateOfferForm = props => {
           {errors.startDate && touched.startDate ? (
             <Text>{errors.startDate}</Text>
           ) : null}
-          <Picker onValueChange={val => setFieldValue('contractType', val)}>
-            <Picker.Item label="CDD" value="cdd" />
-            <Picker.Item label="CDI" value="cdi" />
-          </Picker>
+          <StyledPickerView>
+            <StyledPicker
+              selectedValue={values.contractType}
+              onValueChange={val => setFieldValue('contractType', val)}
+              style={{
+                height: 24,
+                paddingLeft: 24,
+                color: '#92929d',
+                fontFamily: 'Poppins-Regular',
+              }}>
+              {types.map((info, i) => {
+                return (
+                  <StyledPicker.Item
+                    key={i}
+                    label={info.name}
+                    value={`/contracts_types/${info.id}`}
+                  />
+                );
+              })}
+            </StyledPicker>
+          </StyledPickerView>
           {errors.contractType && touched.contractType ? (
             <Text>{errors.contractType}</Text>
           ) : null}
-          <StyledButton onPress={handleSubmit} mode="contained">Créez votre offre</StyledButton>
+          <StyledButton onPress={handleSubmit} mode="contained">
+            Créez votre offre
+          </StyledButton>
         </StyledView>
       )}
     </Formik>

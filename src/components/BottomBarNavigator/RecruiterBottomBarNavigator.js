@@ -6,7 +6,7 @@ import {useTheme} from 'react-native-paper';
 
 import MyOffersScreen from '../../screens/Offers/MyOffers/MyOffersScreen';
 import SingleOfferScreen from '../../screens/Offers/SingleOffer/SingleOfferScreen';
-import UserProfileScreen from "../../screens/UserProfile/UserProfileScreen";
+import UserProfileScreen from '../../screens/UserProfile/UserProfileScreen';
 import CreateOfferScreen from '../../screens/Offers/CreateOffer/CreateOfferScreen';
 import ListOfferScreen from '../../screens/Offers/ListOffer/ListOfferScreen';
 
@@ -19,11 +19,18 @@ function OfferListStackScreen() {
       <OfferListStack.Screen
         name="ListOffers"
         component={ListOfferScreen}
-        options={{tabBarVisible: false}}
+        options={{
+          headerTitle: "Toutes vos offres",
+          headerTitleStyle: {fontFamily: 'Poppins-Medium', paddingTop: 4},
+        }}
       />
       <OfferListStack.Screen
         name="SingleOfferScreen"
         component={SingleOfferScreen}
+        options={{
+          headerTitle: "Détails de l'offre",
+          headerTitleStyle: {fontFamily: 'Poppins-Medium', paddingTop: 4},
+        }}
       />
       <OfferListStack.Screen name="OffersScreen" component={MyOffersScreen} />
     </OfferListStack.Navigator>
@@ -50,11 +57,11 @@ export const RecruiterBottomBarNavigation = () => {
         options={{
           tabBarLabel: 'Accueil',
           tabBarColor: tabBarColor,
-          tabBarIcon: 'home',
+          tabBarIcon: 'home-outline',
         }}
       />
       <Tab.Screen
-        name="Login"
+        name="CreateOffer"
         component={CreateOfferScreen}
         options={{
           tabBarLabel: 'Créer une offre',
@@ -68,7 +75,7 @@ export const RecruiterBottomBarNavigation = () => {
         options={{
           tabBarLabel: 'Profile',
           tabBarColor: tabBarColor,
-          tabBarIcon: 'account-circle',
+          tabBarIcon: 'account-circle-outline',
         }}
       />
     </Tab.Navigator>

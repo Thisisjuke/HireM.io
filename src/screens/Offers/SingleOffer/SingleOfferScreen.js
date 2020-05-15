@@ -49,13 +49,13 @@ export const SingleOfferScreen = ({route}) => {
         {userInfo.isRecruiter === true && (
           <StyledView>
             <Button uppercase={false} mode="contained">
-              Invite someone
+              Inviter un candidat
             </Button>
             <StyledInvertedButton
               uppercase={false}
               onPress={() => navigation.navigate('OffersScreen')}
               mode="contained">
-              <Text style={{color: '#0062ff'}}>See Applications for this Offer</Text>
+              <Text style={{color: '#0062ff'}}>Voir candidatures</Text>
             </StyledInvertedButton>
           </StyledView>
         )}
